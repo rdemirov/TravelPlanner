@@ -30,6 +30,10 @@ module.exports = {
       template: "./src/client/views/index.html",
       filename: "./index.html"
     }),
+    new HtmlWebPackPlugin({
+      template: "./src/client/views/newTrip.html",
+      filename: "./newTrip.html"
+    }),
     new CleanWebpackPlugin({
       // Simulate the removal of files
       dry: true,

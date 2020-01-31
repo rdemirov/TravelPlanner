@@ -1,0 +1,91 @@
+#navMenu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style-type: none;
+}
+
+.tripsList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#footer {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#content {
+}
+
+h1 {
+  text-align: center;
+  text-decoration: underline;
+  font-family: "Molle", cursive;
+  font-size: large;
+  padding: 15px;
+}
+
+.navLink {
+  margin: 15px;
+  height: 50px;
+  width: 150px;
+  font-weight: bold;
+  font-size: 25px;
+  color: #086a87;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.navLink:hover {
+  font-size: 30px;
+}
+
+.tripItem {
+  display: flex;
+  flex-direction: column;
+  background-color: #cbfcfa;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#header {
+  grid-area: header;
+}
+
+#footer {
+  grid-area: footer;
+}
+
+.newTripContainer {
+  padding: 25px;
+  background-color: #e0e0ec;
+  display: flex;
+  flex-direction: column;
+}
+
+.newTripContainer fieldset {
+  margin: 15px;
+  padding: 15px;
+  border: 1px black solid;
+}
+
+.newTripContainer legend {
+  font-size: 15px;
+  text-decoration: underline;
+}
+
+.newTripContainer label {
+  font-weight: bold;
+  font-size: 18px;
+}

@@ -33,6 +33,10 @@ app.get("/", function(req, res) {
   res.sendFile("dist/index.html");
 });
 
+app.get("/newTrip", function(req, res) {
+  res.sendFile("dist/newTrip.html");
+});
+
 // designates what port the app will listen to for incoming requests
 app.listen(PORT, function() {
   console.log(`Travel planner server listening on port ${PORT}`);
