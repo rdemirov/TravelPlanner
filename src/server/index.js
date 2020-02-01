@@ -4,7 +4,6 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const request = require("request");
-const tripsList = require("./storage/trips.json");
 
 const {
   DARK_SKY_API_KEY,
@@ -62,7 +61,7 @@ app.get("/getCountries", function(req, resp) {
           languages,
           timezones,
           latlng,
-          alpha2code
+          alpha2Code
         } = countriesList[index];
         countriesData[name] = {
           flag,
@@ -70,7 +69,7 @@ app.get("/getCountries", function(req, resp) {
           languages,
           timezones,
           latlng,
-          alpha2code
+          countryCode: alpha2Code
         };
       }
       resp.send(countriesData);
@@ -79,6 +78,7 @@ app.get("/getCountries", function(req, resp) {
 });
 
 app.post("/listCities", function(req, resp) {
+  console.log(req.body);
   const qs = {
     username: "rdemirov",
     country: req.body.countryCode,
@@ -110,4 +110,22 @@ app.post("/listCities", function(req, resp) {
         Any: {}
       });
   });
+});
+
+app.post("/addTrip", function(req, res) {
+  let storedTrips = fs.readFileSync(__dirname + "/storage/trips.json");
+  let tripsData = JSON.parse(storedTrips);
+  if (!tripsData.trips) tripsData.trips = [];
+  tripsData.trips.push(req.body);
+  fs.writeFileSync(
+    __dirname + "/storage/trips.json",
+    JSON.stringify(tripsData)
+  );
+  res.send("DONE");
+});
+
+app.get("/getTrips", function(req, res) {
+  let storedTrips = fs.readFileSync(__dirname + "/storage/trips.json");
+  let tripsData = JSON.parse(storedTrips);
+  res.send(tripsData.trips);
 });

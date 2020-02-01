@@ -26,26 +26,26 @@
       </div>
       <main>
         <div>
-          <form class="newTripContainer">
+          <form class="newTripContainer" onsubmit="Client.handleSubmit(event)">
             <div>
               <label for="country">Country</label>
               <select id="country" onchange="Client.handleDropdownChange(event)" ></select>
               <label for="city">City</label>
-              <select id="city"  onchange="Client.handleDropdownChange(event)"></select>
+              <select id="city"  disabled=true onchange="Client.handleDropdownChange(event)"></select>
             </div>
             <div>
               <label for="startDate">Start Date</label>
-              <input type="date" id="startDate" />
+              <input type="date" id="startDate" pattern="\d{4}-\d{2}-\d{2}" />
 
               <label for="endDate">End Date</label>
-              <input type="date" id="endDate" />
+              <input type="date" id="endDate"  pattern="\d{4}-\d{2}-\d{2}"/>
             </div>
             <div>
               Cloudy, with a chance of rain
             </div>
 <div>
-            <button type="submit">Save</button>
-            <button type="reset">Reset</button>
+            <button type="submit"   onclick="Client.handleSubmit(event)" onsubmit="Client.handleSubmit(event)">Save</button>
+            <button type="reset" onclick="Client.handleReset(event)">Reset</button>
         </div>
           </form>
         </div>
