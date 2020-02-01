@@ -34,7 +34,7 @@ h1 {
   width: 150px;
   font-weight: bold;
   font-size: 25px;
-  color: #086a87;
+  color: #000;
   background-color: transparent;
   cursor: pointer;
   padding: 10px;
@@ -88,4 +88,19 @@ h1 {
 .newTripContainer label {
   font-weight: bold;
   font-size: 18px;
+}
+
+.tripsList {
+  display: flex;
+  flex-direction: column;
+}
+
+#tripDetailsContainer {
+  background-color: #e0e0ec;
+  display: flex;
+}
+
+.tripInformation {
+  display: flex;
+  flex-direction: column;
 }

@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const request = require("request");
+const tripsList = require("./storage/trips.json");
 
 const {
   DARK_SKY_API_KEY,
@@ -45,6 +46,9 @@ app.listen(PORT, function() {
 app.get("/getCountries", function(req, resp) {
   request(COUNTRIES_API_URL, { json: true }, (err, response) => {
     if (err) {
+      resp.send({
+        error: "Error fetching countries!.Please try again later"
+      });
       throw err;
     }
     if (response && response.body) {
