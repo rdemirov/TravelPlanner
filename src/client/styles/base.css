@@ -154,3 +154,26 @@ h1 {
   font-style: italic;
   font-size: 18px;
 }
+
+input[type="date"] {
+  min-width: 100px;
+  max-width: 150px;
+  height: 30px;
+  font-size: 15px;
+  text-align: center;
+  outline: none;
+}
+
+input[type="date"]::-webkit-clear-button {
+  font-size: 18px;
+  height: 30px;
+  position: relative;
+}
+
+input[type="date"]::-webkit-inner-spin-button {
+  height: 28px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  font-size: 15px;
+}
