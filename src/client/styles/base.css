@@ -87,7 +87,8 @@ h1 {
 
 .newTripContainer label {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 15px;
+  padding: 10px;
 }
 
 .tripsList {
@@ -124,4 +125,32 @@ h1 {
 .tripInformation .infoLabel {
   font-style: italic;
   font-weight: bold;
+}
+
+.formControl {
+  margin: 15px;
+  font-size: 15px;
+}
+
+.formControl select {
+  min-width: 100px;
+  max-width: 150px;
+  height: 30px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.formControl button {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100px;
+  height: 50px;
+}
+
+.formControl p {
+  padding: 25px;
+  font-style: italic;
+  font-size: 18px;
 }

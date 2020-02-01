@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link href="https://fonts.googleapis.com/css?family=Molle:400i&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Molle:400i&display=swap"
+      rel="stylesheet"
+    />
     <title>Travel Planner</title>
   </head>
   <body>
@@ -15,10 +18,20 @@
           <div id="navBar">
             <ul id="navMenu">
               <li>
-                <a href="./index.html" class="navLink" onclick="Client.renderTripsList()">My Trips</a>
+                <a
+                  href="./index.html"
+                  class="navLink"
+                  onclick="Client.renderTripsList()"
+                  >My Trips</a
+                >
               </li>
               <li>
-                <a href="./newTrip.html" class="navLink" onclick="Client.renderNewTripForm()">Add a trip</a>
+                <a
+                  href="./newTrip.html"
+                  class="navLink"
+                  onclick="Client.renderNewTripForm()"
+                  >Add a trip</a
+                >
               </li>
             </ul>
           </div>
@@ -27,26 +40,41 @@
       <main>
         <div>
           <form class="newTripContainer" onsubmit="Client.handleSubmit(event)">
-            <div>
+            <div class="formControl">
               <label for="country">Country</label>
-              <select id="country" onchange="Client.handleDropdownChange(event)" ></select>
+              <select
+                id="country"
+                onchange="Client.handleDropdownChange(event)"
+              ></select>
               <label for="city">City</label>
-              <select id="city"  disabled=true onchange="Client.handleDropdownChange(event)"></select>
+              <select
+                id="city"
+                disabled="true"
+                onchange="Client.handleDropdownChange(event)"
+              ></select>
             </div>
-            <div>
+            <div class="formControl">
               <label for="startDate">Start Date</label>
               <input type="date" id="startDate" pattern="\d{4}-\d{2}-\d{2}" />
 
               <label for="endDate">End Date</label>
-              <input type="date" id="endDate"  pattern="\d{4}-\d{2}-\d{2}"/>
+              <input type="date" id="endDate" pattern="\d{4}-\d{2}-\d{2}" />
             </div>
-            <div>
-              Cloudy, with a chance of rain
+            <div class="formControl">
+              <p id="weather">Cloudy, with a chance of rain</p>
             </div>
-<div>
-            <button type="submit"   onclick="Client.handleSubmit(event)" onsubmit="Client.handleSubmit(event)">Save</button>
-            <button type="reset" onclick="Client.handleReset(event)">Reset</button>
-        </div>
+            <div class="formControl">
+              <button
+                type="submit"
+                onclick="Client.handleSubmit(event)"
+                onsubmit="Client.handleSubmit(event)"
+              >
+                Save
+              </button>
+              <button type="reset" onclick="Client.handleReset(event)">
+                Reset
+              </button>
+            </div>
           </form>
         </div>
       </main>
