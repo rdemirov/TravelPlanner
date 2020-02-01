@@ -48,7 +48,6 @@ export const handleDropdownChange = event => {
 };
 
 export const handleSubmit = event => {
-  const countriesList = localStorage.getItem("countriesList", countriesList);
   const startDateElement = document.getElementById("startDate");
   const endDateElement = document.getElementById("endDate");
   const cityElement = document.getElementById("city");
