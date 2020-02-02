@@ -107,6 +107,7 @@ app.post("/listCities", function(req, resp) {
 });
 
 app.post("/addTrip", function(req, res) {
+  console.log(req.body);
   let storedTrips = fs.readFileSync(__dirname + "/storage/trips.json");
   let tripsData = JSON.parse(storedTrips);
   if (!tripsData.trips) tripsData.trips = [];
@@ -171,8 +172,14 @@ app.post("/getDestinationPhoto", function(req, res) {
       throw err;
     }
     console.log(response);
-    if (response && response.body && response.body.hits) {
-      res.send(response.body.hits);
-    } else res.send([]);
+    if (
+      response &&
+      response.body &&
+      response.body.hits &&
+      response.body.hits.length &&
+      response.body.hits[0].previewURL
+    ) {
+      res.send({ img: response.body.hits[0].previewURL });
+    } else res.send({});
   });
 });

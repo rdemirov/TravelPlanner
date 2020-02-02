@@ -73,6 +73,8 @@ h1 {
 }
 
 .newTripContainer {
+  margin-top: 15px;
+  margin-bottom: 15px;
   padding: 25px;
   background-color: #e0e0ec;
   grid-area: mainContent;
