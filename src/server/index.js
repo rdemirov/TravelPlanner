@@ -143,9 +143,12 @@ app.post("/getWeatherForecast", function(req, res) {
       response &&
       response.body &&
       response.body.daily &&
-      response.body.daily.data
+      response.body.daily.data &&
+      response.body.daily.data.length
     ) {
-      res.send(response.body.daily.data);
+      const dailyForecast = response.body.daily.data[0];
+      const { summary, temperatureHigh, temperatureLow } = dailyForecast;
+      res.send({ summary, temperatureHigh, temperatureLow });
     } else res.send({});
   });
 });

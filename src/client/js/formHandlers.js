@@ -92,3 +92,29 @@ export const handleReset = event => {
   startDateElement.value = moment(new Date()).format("YYYY-MM-DD");
   endDateElement.value = moment(new Date()).format("YYYY-MM-DD");
 };
+
+export const handleStartDateChange = event => {
+  const startDate = event.target.value;
+  const cityDropdownElement = document.getElementById("city");
+  const selectedCity = citiesList[cityDropdownElement.value];
+  const { lat, lng } = selectedCity;
+  fetch(`http://localhost:${app_port}/getWeatherForecast`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      forecastDate: startDate,
+      lat,
+      lng
+    })
+  })
+    .then(res => res.json())
+    .then(res => {
+      const { summary, temperatureLow, temperatureHigh } = res;
+      const weatherData = document.getElementById("weatherData");
+      weatherData.innerHTML = `<p id="weather">${summary} Temperature ${Math.round(
+        temperatureLow
+      )} - ${Math.round(temperatureHigh)} degrees</p>`;
+    });
+};
