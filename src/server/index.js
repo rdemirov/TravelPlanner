@@ -60,7 +60,8 @@ app.get("/getCountries", function(req, resp) {
           currencies,
           languages,
           timezones,
-          latlng,
+          lat: latlng[0],
+          lng: latlng[1],
           countryCode: alpha2Code
         };
       }

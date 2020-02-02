@@ -27,8 +27,18 @@ export const handleDropdownChange = event => {
         .then(res => res.json())
         .then(function(res) {
           if (!res.error) {
-            citiesList = res;
+            const countryData = countriesList[selectedValue];
             let citiesUnsorted = Object.keys(res);
+            if (
+              citiesUnsorted &&
+              citiesUnsorted.length === 1 &&
+              citiesUnsorted[0] === "Any"
+            ) {
+              res["Any"].lat = countryData.lat;
+              res["Any"].lng = countryData.lng;
+            }
+            citiesList = res;
+            console.log(citiesList);
             let citiesKeys = citiesUnsorted.sort(function(a, b) {
               if (a < b) return -1;
               else if (a > b) return 1;
