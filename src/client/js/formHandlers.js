@@ -62,6 +62,7 @@ export const handleSubmit = event => {
   const endDateElement = document.getElementById("endDate");
   const cityElement = document.getElementById("city");
   const countryElement = document.getElementById("country");
+  const weatherElement = document.getElementById("weather");
 
   fetch(`http://localhost:${app_port}/addTrip`, {
     method: "POST",
@@ -71,11 +72,9 @@ export const handleSubmit = event => {
     body: JSON.stringify({
       startDate: startDateElement.value,
       endDate: endDateElement.value,
-      city: { ...citiesList[cityElement.value], name: cityElement.value },
-      country: {
-        ...countriesList[countryElement.value],
-        name: countryElement.value
-      }
+      city: cityElement.value,
+      country: countryElement.value,
+      weather: weatherElement.textContent
     })
   }).then(res => res);
 };

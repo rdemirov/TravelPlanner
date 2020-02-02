@@ -1,36 +1,53 @@
+import moment from "moment";
 export let countriesList = {};
 
 export const renderTripDetails = tripDetails => {
-  //         startDate: "2020-02-07"
-  // endDate: "2020-02-28"
-  // city:
-  // lat: "-36.75818"
-  // lng: "144.28024"
-  // name: "Bendigo"
-  // __proto__: Object
-  // country:
-  // flag: "https://restcountries.eu/data/aus.svg"
-  // currencies: [{…}]
-  // languages: [{…}]
-  // timezones: (8) ["UTC+05:00", "UTC+06:30", "UTC+07:00", "UTC+08:00", "UTC+09:30", "UTC+10:00", "UTC+10:30", "UTC+11:30"]
-  // latlng: (2) [-27, 133]
-  // countryCode: "AU"
-  // name: "Australia"
-  //     <div id="tripDetailsContainer">
-  //     <div>
-  //         <figure>
-  //             <img src="" alt="prague" />
-  //             <figcaption>Prague, Czech Republic</figcaption>
-  //         </figure>
-  //     </div>
-  //     <div class="tripInformation">
-  //         <p id="countryData">Prague, Czech Republic</p>
-  //         <p id="tripDates"><span class="infoLabel">Start date:</span> 2020-02-01   <span class="infoLabel">End Date:</span class="infoLabel"> 2020-02-10</p>
-  //         <p id="duration"><span class="infoLabel">Duration: </span> 9 days</p>
-  //         <p id="countdown">1 day until your trip</p>
-  //         <p>Cloudy</p>
-  //     </div>
-  // </div>
+  const { startDate, endDate, city, country, weather } = tripDetails;
+  let momentStartDate = moment(startDate);
+  let durationString = "",
+    countdownString = "",
+    countdown;
+  const currentDate = moment(new Date());
+  countdown = momentStartDate.diff(currentDate, "days");
+  let countdownMessage;
+  if (countdown > 0) {
+    countdownMessage = `You have ${countdown} days until departure`;
+  } else if (countdown === 0) {
+    countdownMessage = `Your trip is today`;
+  } else countdownMessage = `<strong>Trip expired</strong>`;
+
+  countdownString = `<p id="countdown">${countdownMessage}</p>`;
+
+  if (endDate) {
+    let momentEndDate = moment(endDate);
+    durationString = `<p id="duration"><span class="infoLabel">Duration: </span> <span id="tripDuration">${momentEndDate.diff(
+      momentStartDate,
+      "days"
+    )} days</span></p>`;
+  }
+  const tripsListRoot = document.querySelector(".tripsList");
+  const tripItemRoot = document.createElement("div");
+  tripItemRoot.setAttribute("id", "tripDetailsContainer");
+  const figureRoot = document.createElement("div");
+  const figure = document.createElement("figure");
+  const cityImage = document.createElement("img");
+  cityImage.setAttribute("src", "");
+  cityImage.setAttribute("alt", city);
+  const figCaption = document.createElement("figcaption");
+  figCaption.textContent = `${country}, ${city}`;
+  figure.appendChild(cityImage);
+  figure.appendChild(figCaption);
+  figureRoot.appendChild(figure);
+  tripItemRoot.appendChild(figureRoot);
+  const tripInformationRoot = document.createElement("div");
+  tripInformationRoot.className = "tripInformation";
+  tripInformationRoot.innerHTML = `<p id="countryData">${city}, ${country}</p>
+        <p id="tripDates"><span class="infoLabel">Start date:  </span>${startDate}   <span class="infoLabel">End Date:  </span class="infoLabel">${endDate}</p>
+        ${durationString}
+        ${countdownString}
+        <p id="weather">${weather}</p>`;
+  tripItemRoot.appendChild(tripInformationRoot);
+  tripsListRoot.appendChild(tripItemRoot);
 };
 
 export const renderTripsList = () => {
