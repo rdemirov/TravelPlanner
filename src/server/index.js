@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const request = require("request");
+const moment = require("moment");
 
 const {
   DARK_SKY_API_KEY,
@@ -12,16 +13,6 @@ const {
   GEONAMES_USERNAME
 } = process.env;
 const PORT = APP_PORT || 8000;
-const COUNTRIES_API_URL = "https://restcountries.eu/rest/v2/all";
-
-// Example Dark Sky URL : https://api.darksky.net/forecast/[key]/[latitude],[longitude]
-const DARK_SKY_BASE_URL = `https://api.darksky.net/forecast/${DARK_SKY_API_KEY}/`;
-
-//Example Pixabay URL : https://pixabay.com/api/?key=15024305-9dd9b9c466b23c7c749a41ce7&q=yellow+flowers&image_type=photo
-const PIXABAY_URL = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}`;
-
-//Example Geonames URL: http://api.geonames.org/searchJSON?formatted=true&username=rdemirov&q=london&maxRows=10
-const GEONAMES_URL = "http://api.geonames.org/searchJSON";
 
 const app = express();
 
@@ -43,6 +34,7 @@ app.listen(PORT, function() {
 });
 
 app.get("/getCountries", function(req, resp) {
+  const COUNTRIES_API_URL = "https://restcountries.eu/rest/v2/all";
   request(COUNTRIES_API_URL, { json: true }, (err, response) => {
     if (err) {
       resp.send({
@@ -78,9 +70,10 @@ app.get("/getCountries", function(req, resp) {
 });
 
 app.post("/listCities", function(req, resp) {
-  console.log(req.body);
+  //Example Geonames URL: http://api.geonames.org/searchJSON?formatted=true&username=rdemirov&q=london&maxRows=10
+  const GEONAMES_URL = "http://api.geonames.org/searchJSON";
   const qs = {
-    username: "rdemirov",
+    username: GEONAMES_USERNAME || "rdemirov",
     country: req.body.countryCode,
     maxRows: 1000,
     fcode: "PPLA",
@@ -121,11 +114,59 @@ app.post("/addTrip", function(req, res) {
     __dirname + "/storage/trips.json",
     JSON.stringify(tripsData)
   );
-  res.send("DONE");
+  res.send({
+    success: true
+  });
 });
 
 app.get("/getTrips", function(req, res) {
   let storedTrips = fs.readFileSync(__dirname + "/storage/trips.json");
   let tripsData = JSON.parse(storedTrips);
   res.send(tripsData.trips);
+});
+
+app.post("/getWeatherForecast", function(req, res) {
+  const { foreCastDate, lat, lng } = req.body;
+  const requestDate = moment(foreCastDate).format("YYYY-MM-DDTHH:mm:ssZ");
+  const DARK_SKY_BASE_URL = `https://api.darksky.net/forecast/${DARK_SKY_API_KEY}/${lat},${lng},${requestDate}`;
+  console.log(DARK_SKY_BASE_URL);
+  const qs = {
+    exclude: "currently,flags,minutely,hourly",
+    units: "si"
+  };
+  request(DARK_SKY_BASE_URL, { json: true, qs }, (err, response) => {
+    if (err) {
+      throw err;
+    }
+    if (
+      response &&
+      response.body &&
+      response.body.daily &&
+      response.body.daily.data
+    ) {
+      res.send(response.body.daily.data);
+    } else res.send({});
+  });
+});
+
+app.post("/getDestinationPhoto", function(req, res) {
+  //Example Pixabay URL : https://pixabay.com/api/?key=15024305-9dd9b9c466b23c7c749a41ce7&q=yellow+flowers&image_type=photo
+  const { city } = req.body;
+  const PIXABAY_URL = `https://pixabay.com/api/`;
+
+  console.log(PIXABAY_URL);
+  const qs = {
+    key: PIXABAY_API_KEY,
+    image_type: "photo",
+    q: city
+  };
+  request(PIXABAY_URL, { json: true, qs }, (err, response) => {
+    if (err) {
+      throw err;
+    }
+    console.log(response);
+    if (response && response.body && response.body.hits) {
+      res.send(response.body.hits);
+    } else res.send([]);
+  });
 });
