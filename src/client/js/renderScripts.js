@@ -6,6 +6,7 @@ export const renderTripDetails = tripDetails => {
   let momentStartDate = moment(startDate);
   let durationString = "",
     countdownString = "",
+    endDateString = "",
     countdown;
   const currentDate = moment(new Date());
   countdown = momentStartDate.diff(currentDate, "days");
@@ -19,6 +20,7 @@ export const renderTripDetails = tripDetails => {
   countdownString = `<p id="countdown">${countdownMessage}</p>`;
 
   if (endDate) {
+    endDateString = `&nbsp;&nbsp;<span class="infoLabel">End Date:  </span class="infoLabel">${endDate}`;
     let momentEndDate = moment(endDate);
     durationString = `<p id="duration"><span class="infoLabel">Duration: </span> <span id="tripDuration">${momentEndDate.diff(
       momentStartDate,
@@ -42,7 +44,7 @@ export const renderTripDetails = tripDetails => {
   const tripInformationRoot = document.createElement("div");
   tripInformationRoot.className = "tripInformation";
   tripInformationRoot.innerHTML = `<p id="countryData">${city}, ${country}</p>
-        <p id="tripDates"><span class="infoLabel">Start date:  </span>${startDate}   <span class="infoLabel">End Date:  </span class="infoLabel">${endDate}</p>
+        <p id="tripDates"><span class="infoLabel">Start date:  </span>${startDate}${endDateString}</p>
         ${durationString}
         ${countdownString}
         <p id="weather">${weather}</p>`;
