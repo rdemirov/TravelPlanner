@@ -37,13 +37,11 @@ export const handleDropdownChange = event => {
               res["Any"].lng = countryData.lng;
             }
             citiesList = res;
-            console.log(citiesList);
             let citiesKeys = citiesUnsorted.sort(function(a, b) {
               if (a < b) return -1;
               else if (a > b) return 1;
               return 0;
             });
-            console.log(res);
             for (let index = 0; index < citiesKeys.length; index++) {
               const option = document.createElement("option");
               option.setAttribute("value", citiesKeys[index]);
@@ -93,9 +91,7 @@ export const handleReset = event => {
 };
 
 export const handleStartDateChange = event => {
-  console.log("changed");
   const startDate = event.target.value;
-  console.log(startDate);
   const cityDropdownElement = document.getElementById("city");
   const selectedCity = citiesList[cityDropdownElement.value];
   const { lat, lng } = selectedCity;

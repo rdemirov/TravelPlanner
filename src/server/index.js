@@ -107,7 +107,6 @@ app.post("/listCities", function(req, resp) {
 });
 
 app.post("/addTrip", function(req, res) {
-  console.log(req.body);
   let storedTrips = fs.readFileSync(__dirname + "/storage/trips.json");
   let tripsData = JSON.parse(storedTrips);
   if (!tripsData.trips) tripsData.trips = [];
@@ -130,10 +129,7 @@ app.get("/getTrips", function(req, res) {
 app.post("/getWeatherForecast", function(req, res) {
   const { forecastDate, lat, lng } = req.body;
   const requestDate = moment(forecastDate).format("YYYY-MM-DDTHH:mm:ssZ");
-  console.log(forecastDate);
-  console.log(requestDate);
   const DARK_SKY_BASE_URL = `https://api.darksky.net/forecast/${DARK_SKY_API_KEY}/${lat},${lng},${requestDate}`;
-  console.log(DARK_SKY_BASE_URL);
   const qs = {
     exclude: "currently,flags,minutely,hourly",
     units: "si"
@@ -160,8 +156,6 @@ app.post("/getDestinationPhoto", function(req, res) {
   //Example Pixabay URL : https://pixabay.com/api/?key=15024305-9dd9b9c466b23c7c749a41ce7&q=yellow+flowers&image_type=photo
   const { city } = req.body;
   const PIXABAY_URL = `https://pixabay.com/api/`;
-
-  console.log(PIXABAY_URL);
   const qs = {
     key: PIXABAY_API_KEY,
     image_type: "photo",
@@ -171,7 +165,6 @@ app.post("/getDestinationPhoto", function(req, res) {
     if (err) {
       throw err;
     }
-    console.log(response);
     if (
       response &&
       response.body &&
