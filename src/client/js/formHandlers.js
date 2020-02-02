@@ -11,7 +11,6 @@ export const handleDropdownChange = event => {
       break;
     case "country":
       const cityDropdownElement = document.getElementById("city");
-      cityDropdownElement.disabled = false;
       while (cityDropdownElement.firstChild) {
         cityDropdownElement.removeChild(cityDropdownElement.firstChild);
       }
@@ -94,7 +93,9 @@ export const handleReset = event => {
 };
 
 export const handleStartDateChange = event => {
+  console.log("changed");
   const startDate = event.target.value;
+  console.log(startDate);
   const cityDropdownElement = document.getElementById("city");
   const selectedCity = citiesList[cityDropdownElement.value];
   const { lat, lng } = selectedCity;
@@ -112,9 +113,12 @@ export const handleStartDateChange = event => {
     .then(res => res.json())
     .then(res => {
       const { summary, temperatureLow, temperatureHigh } = res;
-      const weatherData = document.getElementById("weatherData");
-      weatherData.innerHTML = `<p id="weather">${summary} Temperature ${Math.round(
-        temperatureLow
-      )} - ${Math.round(temperatureHigh)} degrees</p>`;
+      if (summary || temperatureHigh || temperatureLow) {
+        const weatherData = document.getElementById("weatherData");
+        weatherData.innerHTML = `<p id="weather">${summary ||
+          ""} Temperature ${Math.round(temperatureLow)} - ${Math.round(
+          temperatureHigh
+        )} degrees</p>`;
+      }
     });
 };

@@ -127,8 +127,10 @@ app.get("/getTrips", function(req, res) {
 });
 
 app.post("/getWeatherForecast", function(req, res) {
-  const { foreCastDate, lat, lng } = req.body;
-  const requestDate = moment(foreCastDate).format("YYYY-MM-DDTHH:mm:ssZ");
+  const { forecastDate, lat, lng } = req.body;
+  const requestDate = moment(forecastDate).format("YYYY-MM-DDTHH:mm:ssZ");
+  console.log(forecastDate);
+  console.log(requestDate);
   const DARK_SKY_BASE_URL = `https://api.darksky.net/forecast/${DARK_SKY_API_KEY}/${lat},${lng},${requestDate}`;
   console.log(DARK_SKY_BASE_URL);
   const qs = {

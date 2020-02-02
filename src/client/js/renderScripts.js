@@ -76,8 +76,12 @@ export const renderNewTripForm = () => {
     .then(function(res) {
       if (!res.error) {
         countriesList = res;
-        const countriesKeys = Object.keys(res);
         const countryDropdownElement = document.getElementById("country");
+        const countriesKeys = Object.keys(res);
+        const defaultOption = document.createElement("option");
+        defaultOption.setAttribute("value", null);
+        defaultOption.textContent = "";
+        countryDropdownElement.appendChild(defaultOption);
         for (let index = 0; index < countriesKeys.length; index++) {
           const option = document.createElement("option");
           option.setAttribute("value", countriesKeys[index]);
