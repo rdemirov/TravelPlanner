@@ -1,16 +1,42 @@
 import { countriesList } from "./renderScripts";
-import { getData, postData } from "./helpers";
 
 let citiesList = {};
 
 export const handleDropdownChange = event => {
   const { value: selectedValue } = event.target;
+  const cityDropdownElement = document.getElementById("city");
   switch (event.target.id) {
     case "city":
-      console.log("city");
+      const startDateElement = document.getElementById("startDate");
+      const startDate = startDateElement.value;
+      if (startDate) {
+        const selectedCity = citiesList[cityDropdownElement.value];
+        const { lat, lng } = selectedCity;
+        fetch(`http://localhost:${app_port}/getWeatherForecast`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            forecastDate: startDate,
+            lat,
+            lng
+          })
+        })
+          .then(res => res.json())
+          .then(res => {
+            const { summary, temperatureLow, temperatureHigh } = res;
+            if (summary || temperatureHigh || temperatureLow) {
+              const weatherData = document.getElementById("weatherData");
+              weatherData.innerHTML = `<p id="weather">${summary ||
+                ""} Temperature ${Math.round(temperatureLow)} - ${Math.round(
+                temperatureHigh
+              )} degrees</p>`;
+            }
+          });
+      }
       break;
     case "country":
-      const cityDropdownElement = document.getElementById("city");
       while (cityDropdownElement.firstChild) {
         cityDropdownElement.removeChild(cityDropdownElement.firstChild);
       }
@@ -47,6 +73,35 @@ export const handleDropdownChange = event => {
               option.setAttribute("value", citiesKeys[index]);
               option.textContent = citiesKeys[index];
               cityDropdownElement.appendChild(option);
+            }
+
+            const selectedCity = citiesList[cityDropdownElement.value];
+            const { lat, lng } = selectedCity;
+            const startDateElement = document.getElementById("startDate");
+            const startDate = startDateElement.value;
+            if (startDate) {
+              fetch(`http://localhost:${app_port}/getWeatherForecast`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                  forecastDate: startDate,
+                  lat,
+                  lng
+                })
+              })
+                .then(res => res.json())
+                .then(res => {
+                  const { summary, temperatureLow, temperatureHigh } = res;
+                  if (summary || temperatureHigh || temperatureLow) {
+                    const weatherData = document.getElementById("weatherData");
+                    weatherData.innerHTML = `<p id="weather">${summary ||
+                      ""} Temperature ${Math.round(
+                      temperatureLow
+                    )} - ${Math.round(temperatureHigh)} degrees</p>`;
+                  }
+                });
             }
           } else alert(res.error);
         });

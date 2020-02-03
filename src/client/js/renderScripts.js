@@ -2,12 +2,11 @@ import moment from "moment";
 export let countriesList = {};
 
 export const renderTripDetails = tripDetails => {
-  const { startDate, endDate, city, country, weather } = tripDetails;
+  const { startDate, endDate, city, country, weather, countdown } = tripDetails;
   let momentStartDate = moment(startDate);
   let durationString = "",
     countdownString = "",
-    endDateString = "",
-    countdown;
+    endDateString = "";
   let imageParameter;
   if (city === "Any") imageParameter = country;
   else imageParameter = city;
@@ -23,17 +22,13 @@ export const renderTripDetails = tripDetails => {
     .then(res => res.json())
     .then(function(res) {
       if (!res.error) {
-        const currentDate = moment(new Date());
-        countdown = momentStartDate.diff(currentDate, "days");
         let countdownMessage;
         if (countdown > 0) {
           countdownMessage = `You have ${countdown} days until departure`;
         } else if (countdown === 0) {
           countdownMessage = `Your trip is today`;
         } else countdownMessage = `<strong>Trip expired</strong>`;
-
         countdownString = `<p id="countdown">${countdownMessage}</p>`;
-
         if (endDate) {
           endDateString = `&nbsp;&nbsp;<span class="infoLabel">End Date:  </span class="infoLabel">${endDate}`;
           let momentEndDate = moment(endDate);
@@ -78,8 +73,16 @@ export const renderTripsList = () => {
     .then(res => res.json())
     .then(function(tripsData) {
       if (!tripsData.error) {
-        for (let index = 0; index < tripsData.length; index++) {
-          renderTripDetails(tripsData[index]);
+        let countdown;
+        const currentDate = moment(new Date());
+        const tripsWithCountdown = tripsData.map(tripData => {
+          const { startDate } = tripData;
+          countdown = moment(startDate).diff(currentDate, "days");
+          tripData.countdown = countdown;
+          return tripData;
+        });
+        for (let index = 0; index < tripsWithCountdown.length; index++) {
+          renderTripDetails(tripsWithCountdown[index]);
         }
       } else alert(res.error);
     });
@@ -93,6 +96,8 @@ export const renderNewTripForm = () => {
     .then(function(res) {
       if (!res.error) {
         countriesList = res;
+        const startDateElement = document.getElementById("startDate");
+        startDateElement.value = moment(new Date()).format("YYYY-MM-DD");
         const countryDropdownElement = document.getElementById("country");
         const countriesKeys = Object.keys(res);
         const defaultOption = document.createElement("option");
