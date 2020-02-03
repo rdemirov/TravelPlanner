@@ -73,16 +73,21 @@ export const renderTripsList = () => {
     .then(res => res.json())
     .then(function(tripsData) {
       if (!tripsData.error) {
-        let countdown;
-        const currentDate = moment(new Date());
-        const tripsWithCountdown = tripsData.map(tripData => {
-          const { startDate } = tripData;
-          countdown = moment(startDate).diff(currentDate, "days");
-          tripData.countdown = countdown;
-          return tripData;
-        });
-        for (let index = 0; index < tripsWithCountdown.length; index++) {
-          renderTripDetails(tripsWithCountdown[index]);
+        if (tripsData && tripsData.length) {
+          let countdown;
+          const currentDate = moment(new Date());
+          const tripsWithCountdown = tripsData.map(tripData => {
+            const { startDate } = tripData;
+            countdown = moment(startDate).diff(currentDate, "days");
+            tripData.countdown = countdown;
+            return tripData;
+          });
+          for (let index = 0; index < tripsWithCountdown.length; index++) {
+            renderTripDetails(tripsWithCountdown[index]);
+          }
+        } else {
+          const tripsListRoot = document.querySelector(".tripsList");
+          tripsListRoot.innerHTML = "<p class='noTrips'> No trips planned</p>";
         }
       } else alert(res.error);
     });
