@@ -7,10 +7,10 @@ const request = require("request");
 const moment = require("moment");
 
 const {
-  DARK_SKY_API_KEY,
-  APP_PORT,
-  PIXABAY_API_KEY,
-  GEONAMES_USERNAME
+  DARK_SKY_API_KEY, // b8133274e58598bcd3625015835ecc69
+  APP_PORT, // 8000
+  PIXABAY_API_KEY, // 15024305-9dd9b9c466b23c7c749a41ce7
+  GEONAMES_USERNAME // rdemirov
 } = process.env;
 const PORT = APP_PORT || 8000;
 
