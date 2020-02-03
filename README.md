@@ -37,4 +37,9 @@ npm run build-prod
 
 The application UI has 2 pages - "My trips" and "Add a trip".
 On the "My trips" page , the user can view all his planned trips - past, present and future ones.
-The "Add a trip" page contains a form allowing the user to add a new trip to the list
+The "Add a trip" page contains a form allowing the user to add a new trip to the list.
+
+## Implemented suggestions for expanding the project 
+
+* Entering of optional end date and displaying the trip's duration 
+* Allowing the user to enter multiple trips 
