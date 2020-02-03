@@ -11,7 +11,6 @@ import {
   handleDropdownChange,
   handleStartDateChange
 } from "./js/formHandlers";
-import moment from "moment";
 
 if (document.querySelector(".tripsList")) {
   renderTripsList();
