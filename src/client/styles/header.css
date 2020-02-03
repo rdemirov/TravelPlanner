@@ -1,0 +1,36 @@
+#header {
+  grid-area: header;
+}
+
+h1 {
+  text-align: center;
+  text-decoration: underline;
+  font-family: "Molle", cursive;
+  font-size: 45px;
+  font-weight: bold;
+  padding: 15px;
+}
+
+#navMenu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style-type: none;
+}
+
+.navLink {
+  margin: 15px;
+  height: 50px;
+  width: 150px;
+  font-weight: bold;
+  font-size: 25px;
+  color: #000;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.navLink:hover {
+  font-size: 30px;
+}

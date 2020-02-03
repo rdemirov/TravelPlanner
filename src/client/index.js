@@ -1,5 +1,9 @@
 import "./styles/reset.css";
 import "./styles/base.css";
+import "./styles/header.css";
+import "./styles/tripInformation.css";
+import "./styles/newTrip.css";
+import "./styles/footer.css";
 import { renderTripsList, renderNewTripForm } from "./js/renderScripts";
 import {
   handleSubmit,

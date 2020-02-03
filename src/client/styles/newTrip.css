@@ -1,0 +1,77 @@
+.newTripContainer {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 25px;
+  background-color: #e0e0ec;
+  grid-area: mainContent;
+  display: flex;
+  flex-direction: column;
+}
+
+.newTripContainer fieldset {
+  margin: 15px;
+  padding: 15px;
+  border: 1px black solid;
+}
+
+.newTripContainer legend {
+  font-size: 15px;
+  text-decoration: underline;
+}
+
+.newTripContainer label {
+  font-weight: bold;
+  font-size: 15px;
+  padding: 10px;
+}
+
+.formControl {
+  margin: 15px;
+  font-size: 15px;
+}
+
+.formControl select {
+  min-width: 100px;
+  max-width: 200px;
+  height: 30px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.formControl button {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100px;
+  height: 50px;
+}
+
+.formControl p {
+  padding: 25px;
+  font-style: italic;
+  font-size: 18px;
+}
+
+input[type="date"] {
+  min-width: 100px;
+  max-width: 150px;
+  height: 30px;
+  font-size: 15px;
+  text-align: center;
+  outline: none;
+}
+
+input[type="date"]::-webkit-clear-button {
+  font-size: 18px;
+  height: 30px;
+  position: relative;
+}
+
+input[type="date"]::-webkit-inner-spin-button {
+  height: 28px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  font-size: 15px;
+}

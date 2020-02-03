@@ -1,0 +1,6 @@
+#footer {
+  text-align: center;
+  font-weight: bold;
+  grid-area: footer;
+  font-size: 18px;
+}

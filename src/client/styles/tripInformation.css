@@ -1,0 +1,38 @@
+.tripsList {
+  display: flex;
+  grid-area: mainContent;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#tripDetailsContainer {
+  background-color: #e0e0ec;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px;
+  margin: 15px;
+}
+
+.tripInformation {
+  display: flex;
+  flex-direction: column;
+  grid-area: mainContent;
+  justify-content: space-around;
+  margin: 15px;
+}
+
+.tripInformation p {
+  padding: 10px;
+  font-size: 20px;
+}
+
+.tripInformation #countryData {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.tripInformation .infoLabel {
+  font-style: italic;
+  font-weight: bold;
+}
