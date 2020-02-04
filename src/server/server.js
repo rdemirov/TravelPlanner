@@ -19,11 +19,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get("/", function(req, res) {
-  res.sendFile("dist/index.html");
+  res.sendFile("dist/index.html", { root: "." });
 });
 
 app.get("/newTrip", function(req, res) {
-  res.sendFile("dist/newTrip.html");
+  res.sendFile("dist/newTrip.html", { root: "." });
 });
 
 app.get("/getCountries", function(req, resp) {

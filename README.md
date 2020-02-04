@@ -19,7 +19,27 @@ npm install
 
 ## Starting the project 
 
-After installation the server is started with:
+After installation, you must create a .env file in the project root folder with the following content: 
+
+```
+APP_PORT=<backend port>
+GEONAMES_USERNAME=<Geonames username>
+PIXABAY_API_KEY=<Pixabay API Key>
+DARK_SKY_API_KEY=<Dark Sky API key>
+```
+
+An example .env file content with the keys used in development: 
+
+```
+
+APP_PORT=8000
+GEONAMES_USERNAME=rdemirov
+PIXABAY_API_KEY=15024305-9dd9b9c466b23c7c749a41ce7
+DARK_SKY_API_KEY=b8133274e58598bcd3625015835ecc69
+
+```
+
+The server is started with:
 
 ```
 npm start
