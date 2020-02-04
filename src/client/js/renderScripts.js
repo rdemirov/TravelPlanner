@@ -16,7 +16,8 @@ export const renderTripDetails = tripDetails => {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      city: imageParameter
+      city: imageParameter,
+      country
     })
   })
     .then(res => res.json())

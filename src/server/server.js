@@ -146,13 +146,12 @@ app.post("/getWeatherForecast", function(req, res) {
 });
 
 app.post("/getDestinationPhoto", function(req, res) {
-  //Example Pixabay URL : https://pixabay.com/api/?key=15024305-9dd9b9c466b23c7c749a41ce7&q=yellow+flowers&image_type=photo
-  const { city } = req.body;
+  const { city, country } = req.body;
   const PIXABAY_URL = `https://pixabay.com/api/`;
   const qs = {
     key: PIXABAY_API_KEY,
     image_type: "photo",
-    q: city
+    q: `${city}|${country}`
   };
   request(PIXABAY_URL, { json: true, qs }, (err, response) => {
     if (err) {
